@@ -1,0 +1,37 @@
+Arguments: 
+  /Users/karthikeyan.y/.nvm/versions/node/v12.14.0/bin/node /usr/local/bin/yarn add express
+
+PATH: 
+  /Users/karthikeyan.y/.nvm/versions/node/v12.14.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/karthikeyan.y/Library/Android/sdk/emulator:/Users/karthikeyan.y/Library/Android/sdk/tools:/Users/karthikeyan.y/Library/Android/sdk/tools/bin:/Users/karthikeyan.y/Library/Android/sdk/platform-tools:/Users/karthikeyan.y/Library/Android/sdk/emulator:/Users/karthikeyan.y/Library/Android/sdk/tools:/Users/karthikeyan.y/Library/Android/sdk/tools/bin:/Users/karthikeyan.y/Library/Android/sdk/platform-tools
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  12.14.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: getaddrinfo ENOTFOUND jfrog.fkinternal.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:60:26)
+
+npm manifest: 
+  {
+    "name": "web-push-notification",
+    "version": "1.0.0",
+    "description": "app with basic push notification",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Push Notification</title>
+  </head>
+  <body>
+    <h3>Web Push Notification Demo</h3>
+    <div class="section">
+      <div>Click to give permission to show notifications</div>
+      <button id="enableNotification">Enable notification</button>
+    </div>
+    <div class="section">
+      <div>You'll get a random notification every 5sec</div>
+      <button id="sendNotification" disabled>
+        Send me random push notification
+      </button>
+    </div>
+    <div class="section">
+      <div>Click to stop receiving notifications class='section'</div>
+      <button id="stopNotification" disabled>
+        Stop receiving push notification
+      </button>
+    </div>
+  </body>
+  <script type="module" src="./index.js" defer></script>
+</html>
