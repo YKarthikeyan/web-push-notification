@@ -1,6 +1,13 @@
 import { subscribe } from './push.js'
 import { postToServer } from './util.js';
 
+(async function () {
+    try {
+        const registration = await navigator.serviceWorker.getRegistration();
+        await registration.pushManager.getSubscription();
+        document.querySelector('#stopNotification').disabled = false;
+    } catch { }
+})();
 
 document.querySelector('#enableNotification').addEventListener('click', async () => {
     await subscribe();

@@ -4,7 +4,9 @@ const webpush = require('web-push');
 const bodyParser = require('body-parser');
 const loki = require('lokijs');
 const dotenv = require('dotenv');
+const quotesJSON = require('./quotes.json');
 
+const quotes = quotesJSON.quotes;
 const db = new loki('notifications.db');
 const users = db.addCollection('notifications');
 const pushTimers = db.addCollection('timers');
@@ -18,21 +20,22 @@ const vapidDetails = {
 };
 
 function sendNotifications(subscriptions) {
-    const notification = JSON.stringify({
-        title: "Hello!!!",
-        options: {
-            body: `ID: ${Math.floor(Math.random() * 100)}`
-        }
-    });
-
     const options = {
         TTL: 10000,
         vapidDetails: vapidDetails
     };
-
     subscriptions.forEach(async (subscription) => {
-        const endpoint = subscription.endpoint;
+        const { endpoint, counter } = subscription;
         const id = endpoint.substr((endpoint.length - 8), endpoint.length);
+        const notification = JSON.stringify({
+            title: "Quotes for today",
+            options: {
+                body: quotes[counter].q
+            }
+        });
+        const sub = users.findOne({ endpoint });
+        sub.counter += 1;
+        await users.update(sub);
         try {
             const result = await webpush.sendNotification(subscription, notification, options)
             console.log(`Endpoint ID: ${id}`);
@@ -57,7 +60,7 @@ app.get('/', (request, response) => {
 })
 
 app.post('/add-subscription', (request, response) => {
-    users.insert(request.body)
+    users.insert({ ...request.body, counter: 0 })
     response.sendStatus(200);
 });
 
@@ -65,7 +68,6 @@ app.post('/notify-me', (request, response) => {
     const subscription = users.findOne(request.body);
     sendNotifications([subscription]);
     const timer = setInterval(() => { sendNotifications([subscription]); }, 5000)
-    console.log(timer)
     if (!pushTimers.findOne({ endpoint: subscription.endpoint })) {
         pushTimers.insert({ endpoint: subscription.endpoint, timerId: timer })
     }
