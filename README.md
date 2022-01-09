@@ -10,3 +10,6 @@
 
 ## How to generate VAPID Details
 1. npx web-push generate-vapid-keys
+
+## DEMO
+https://browser-push-notifications.herokuapp.com/
